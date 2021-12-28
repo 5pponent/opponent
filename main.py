@@ -1,16 +1,21 @@
-# This is a sample Python script.
+def solution(s):
+    if len(s) > 50:
+        return -1
+    elif len(s) < 1:
+        return -1
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+    s = s.replace('zero', '0')
+    s = s.replace('one', '1')
+    s = s.replace('two', '2')
+    s = s.replace('three', '3')
+    s = s.replace('four', '4')
+    s = s.replace('five', '5')
+    s = s.replace('six', '6')
+    s = s.replace('seven', '7')
+    s = s.replace('eight', '8')
+    s = s.replace('nine', '9')
 
+    return int(s)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-sex
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+a = "one2three4fivesixseveneight"
+print(solution(a))
