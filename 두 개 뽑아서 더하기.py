@@ -10,6 +10,3 @@ def solution(numbers):
 
     return sorted(answer)
 
-num = [2,1,3,4,1]
-print(solution(num))
-
