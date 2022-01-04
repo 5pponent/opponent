@@ -1,21 +1,3 @@
-def solution(s):
-    if len(s) > 50:
-        return -1
-    elif len(s) < 1:
-        return -1
-
-    s = s.replace('zero', '0')
-    s = s.replace('one', '1')
-    s = s.replace('two', '2')
-    s = s.replace('three', '3')
-    s = s.replace('four', '4')
-    s = s.replace('five', '5')
-    s = s.replace('six', '6')
-    s = s.replace('seven', '7')
-    s = s.replace('eight', '8')
-    s = s.replace('nine', '9')
-
-    return int(s)
-
-a = "one2three4fivesixseveneight"
-print(solution(a))
+l = [1, 2]
+l.sum(1)
+print(l)
