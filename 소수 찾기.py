@@ -2,11 +2,10 @@ from itertools import combinations, permutations
 
 def solution(numbers):
     answer = 0
-    size = len(numbers) + 1
     al = []; pl = []
     numbers = list(numbers)
 
-    for i in range(1, size):
+    for i in range(1, len(numbers) + 1):
         al = list(map(''.join, permutations(numbers, i)))
         al = list(set(al))
         al = list(map(int, al))
