@@ -17,10 +17,9 @@ for i in range(row):
 좌표조합 = list(combinations(loclist, 3))
 
 for i in range(row):
-    if 2 in p_graph[i]:
-        for j in range(col):
-            if p_graph[i][j] == 2:
-                virus.append((i,j))
+    for j in range(col):
+        if p_graph[i][j] == 2:
+            virus.append((i,j))
 
 queue = deque()
 def infectProcess():
