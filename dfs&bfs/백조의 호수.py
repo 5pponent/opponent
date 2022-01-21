@@ -1,3 +1,4 @@
+import gc
 from collections import deque
 import sys
 input = sys.stdin.readline
@@ -47,6 +48,8 @@ def 만날수있는지확인():
             if graph[nextX][nextY] == 'X' or visited[nextX][nextY] == 1:
                 continue
             if graph[nextX][nextY] == 'L':
+                del q
+                del visited
                 return True
             q.append(nextX)
             q.append(nextY)
@@ -56,4 +59,5 @@ result = 0
 while not 만날수있는지확인():
     하루경과()
     result += 1
+    gc.collect()
 print(result)
