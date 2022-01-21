@@ -28,14 +28,20 @@ def make_copy(three_walls):
     return graph_copy
 
 
-def bfs(g):
-    global escape
-    for i in range(len(temp_q)):
-        q.append(temp_q.popleft())
-    if not temp_q and not q:
-        escape = True
-        return
+# 처음 바이러스가 존재하는 위치 찾기
+def find_virus_zone(g):
+    virus_zone = []
+    for i in range(col):
+        for j in range(row):
+            if g[i][j] == 2:
+                virus_zone.append((i, j))
+    return virus_zone
 
+
+# bfs를 돌면서 바이러스를 퍼트린다
+def bfs(x, y):
+    q = deque()
+    q.append((x, y))
     while q:
         x, y = q.popleft()
         for j in range(4):
@@ -47,23 +53,24 @@ def bfs(g):
                 continue
             if g[nx][ny] == 0:
                 g[nx][ny] = 2
-                # 본 큐에 넣는게 아닌, 임시 큐에 넣는다
-                temp_q.append((nx, ny))
+                q.append((nx, ny))
 
-
-# 바이러스를 찾아서 메인 큐에 집어넣기
-init_virus = []
-for i in range(col):
-    if 2 in graph[i]:
+# 안전지대 (0인곳) 찾기
+def find_safe_zone(g):
+    safe_zone = 0
+    for i in range(col):
         for j in range(row):
-            if graph[i][j] == 2:
-                init_virus.append((i, j))
+            if g[i][j] == 0:
+                safe_zone += 1
+    return safe_zone
 
 
-def put_init_virus(g):
-    for virus_coord in init_virus:
-        x, y = virus_coord
-        g[x][y] = 2
+def print_graph(g):
+    for i in range(col):
+        for j in range(row):
+            print(g[i][j], end=" ")
+        print()
+    print()
 
 
 # case : ((6, 4), (6, 5), (6, 6))
@@ -72,23 +79,16 @@ dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 for case in wall_case:
     # 기본 세팅
-    q = deque()
-    temp_q = deque()
-    escape = False
     g = make_copy(case)
-    count = 0
-    put_init_virus(g)
+    virus_zone = find_virus_zone(g)
 
-    while not escape:  # 메인 루프
-        bfs(g)
-        for i in range(row):
-            for j in range(col):
-                print(g[i][j], end=" ")
-            print()
-        print()
-        time.sleep(2)
-        count += 1
+    for virus_coord in virus_zone:
+        x, y = virus_coord
+        bfs(x, y)
+        print_graph(g)
 
-    result.append(count)
-
+    result.append(find_safe_zone(g))
+print(result)
 print(max(result))
+
+# ((0, 1), (1, 0), (3, 5))
