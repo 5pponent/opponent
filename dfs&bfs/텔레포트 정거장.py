@@ -1,46 +1,34 @@
 from collections import deque
 import sys
 input = sys.stdin.readline
+
 맵크기, 정거장수 = map(int, input().split())
 시작지점, 목표지점 = map(int, input().split())
 
-연결정보 = [], 입구좌표 = []
-for i in range(정거장수):
+텔레포트 = [[] for _ in range(맵크기+1)]
+for _ in range(정거장수):
     x, y = map(int, input().split())
-    연결정보.append((x, y))
+    텔레포트[x].append(y)
+    텔레포트[y].append(x)
 
 visited = [0] * (맵크기 + 1)
 
 def bfs():
-    while lq:
-        loc = lq.popleft()
-        visited[loc] = count
-        left = loc - 1
-        right = loc + 1
-        if left >= 1 and visited[left] == 0:
-            result.append(left)
-            visited[left] = count
-        if right < 맵크기+1 and visited[right] == 0:
-            result.append(right)
-            visited[right] = count
-        for i in range(len(연결정보)):
-            if loc in 연결정보[i]:
-                if loc == 연결정보[i][0] and visited[연결정보[i][1]] == 0:
-                    result.append(연결정보[i][1])
-                    visited[연결정보[i][1]] = count
-                if loc == 연결정보[i][1] and visited[연결정보[i][0]] == 0:
-                    result.append(연결정보[i][0])
-                    visited[연결정보[i][0]] = count
+    q = deque()
+    q.append(시작지점)
+    while q:
+        cur = q.popleft()
+        if cur == 목표지점:
+            return visited[cur]
 
-count = 0
-lq = deque(); result = deque()
-lq.append(시작지점)
+        이동가능위치목록 = [cur + 1, cur - 1]
+        if 텔레포트[cur]:
+            for i in 텔레포트[cur]:
+                이동가능위치목록.append(i)
 
-while 목표지점 not in result:
-    count += 1
-    bfs()
-    if visited[목표지점] != 0:
-        print(count)
-        break
-    for i in range(len(result)):
-        lq.append(result.popleft())
+        for next in 이동가능위치목록:
+            if 0 <= next <= 맵크기 and visited[next] == 0:
+                visited[next] = visited[cur] + 1
+                q.append(next)
+
+print(bfs())

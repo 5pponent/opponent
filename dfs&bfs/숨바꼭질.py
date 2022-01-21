@@ -9,7 +9,7 @@ def bfs():
             print(visited[cur])
             return
 
-        for i in (cur-1, cur+1, cur*2):
+        for i in [cur-1, cur+1, cur*2]:
             if 0 <= i <= 100000 and visited[i] == 0:
                 visited[i] = visited[cur] + 1
                 q.append(i)
