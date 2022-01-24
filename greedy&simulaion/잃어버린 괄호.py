@@ -35,8 +35,3 @@ if cnt > 0 and temp[len(temp)-1] != ')':
 
 최종식 = "".join(str(i) for i in temp)
 print(eval(최종식))
-
-"""
-60-50+40-20+10
-답 : -60
-"""

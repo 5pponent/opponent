@@ -6,6 +6,3 @@ for i in range(1,len(arr)):
     result -= sum([int(j) for j in arr[i].split('+')])
 
 print(result)
-"""
-10+20+30+40-20
-"""
