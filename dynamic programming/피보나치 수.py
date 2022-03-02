@@ -6,8 +6,7 @@ def fibo(x):
     idx = 2
     if x < 2: return li[x]
     while idx <= x:
-        temp = li.popleft()
-        li.append(li[-1] + temp)
+        li.append(li[-1] + li.popleft())
         idx += 1
     return li[-1]
 
