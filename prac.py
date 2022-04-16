@@ -1,14 +1,4 @@
-from queue import PriorityQueue
-import sys
-input = sys.stdin.readline
+t = [(1,3), (2, 4), (4, 0), (5, 0)]
 
-q = PriorityQueue()
-for _ in range(int(input())):
-    cmd = int(input())
-    if cmd == 0:
-        if q.empty():
-            print(0)
-        else:
-            print(q.get()[1])
-    else:
-        q.put((abs(cmd), cmd))
+if (1,3) in t:
+    print("tprtm")
